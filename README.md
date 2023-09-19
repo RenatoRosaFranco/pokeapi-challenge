@@ -45,7 +45,8 @@ de apresentação da estrutura da **response**, que apresenta apenas as **habili
 #### EXEMPLO:
 Dada a chamada:
 ```
-http://localhost:3000/api/v1/pokemons/pikachu
+http://localhost:3000/api/v1/pokemons/:nome_pokemon
+http://localhost:3000/api/v1/pokemons/charmander  # exemplo
 ```
 
 <br>
@@ -63,9 +64,6 @@ A Resposta da API devera ser
 <br>
 
 A Api devera devolver essa estrutura contendo as habilidades do pokemon, sendo mostradas por ordem alfabética
-
-<br>
-
 Abaixo uma lista para você realizar requisições para testar o endpoint com outros pokemons
 
 <br>
@@ -115,6 +113,7 @@ Abaixo você pode acompanhar uma Screenshot de uma requisição realizada ao end
 <br>
   
 Este projeto foi desenvolvido utilizando a **Versão** 3.0.0 do **Ruby**
+
 ```
 3.0.0
 ```
@@ -136,17 +135,20 @@ bundle install
 
 <br>
 
-<div align='center>
+<div align='center'>
   
   # CONFIGURAÇÕES
 </div>
 
 <br>
 
-No arquivo .env na raiz de seu projeto coloque o seguinte valor
+No arquivo **.env** na raiz de seu projeto coloque o seguinte valor
+
 ```
-API_URL='https://pokeapi.co/api/'
+API_URL=https://pokeapi.co/api/
 ```
+
+<br>
 
 A Variavel de ambiente **API_URL** é necessária para termos o ponto base da URL que utilizaremos
 da API do **PokéAPI** quando quisermos consultar os dados dos pokemons lá cadastrados, para montar
@@ -244,7 +246,7 @@ end
 
 <br>
 
-**OBS**: Para ver o cache em pleno funcionamento no ambiente de funcionamento basta executar o comando
+**OBS**: Para ver o cache em pleno funcionamento no ambiente de desenvolvimento basta executar o comando
 abaixo antes de rodar o servidor:
 
 <br>
