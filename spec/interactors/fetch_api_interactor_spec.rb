@@ -9,7 +9,7 @@ describe FetchApiInteractor, type: :interactor do
 
   describe '.call' do
     context 'when fetch a pokemon' do
-      it 'return a success interactor', :aggregate_failures do
+      it 'return a success interactor with pokemon', :aggregate_failures do
         expect(context).to be_a_success
         expect(context.pokemon).not_to be_empty
       end

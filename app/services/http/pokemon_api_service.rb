@@ -6,7 +6,7 @@ module Http
   # Service to fetch data from PokeApi
   class PokemonApiService
     include HTTParty
-    base_uri ENV.fetch('API_URL', 'https://pokeapi.co/api/')
+    base_uri ENV.fetch('API_URL') { 'https://pokeapi.co/api/' }
 
     def initialize(name, page = 1)
       @name = name
@@ -18,7 +18,7 @@ module Http
 
       case response.code
       when 200
-        JSON.parse(response.body)
+        JSON.parse(response.body, symbolize_names: true)
       when 404
         raise Http::Exception::NotFound, response
       else

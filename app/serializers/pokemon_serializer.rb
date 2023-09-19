@@ -2,13 +2,14 @@
 
 # Pokemon serializer class
 class PokemonSerializer < ActiveModel::Serializer
+  # serializer fields names
   attributes :abilities
 
+  # pokemon abilities names sorted by name
   def abilities
-    return [] if object['abilities'].empty?
-
-    object['abilities'].map do |abilities|
-      abilities['ability']['name']
-    end.sort
+    object[:abilities]
+      .map { |ability| ability[:ability][:name] }
+      .sort
+      .presence || []
   end
 end

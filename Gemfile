@@ -52,6 +52,8 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'pry-byebug'
+  gem 'rswag-api'
+  gem 'rswag-ui'
 end
 
 group :development do

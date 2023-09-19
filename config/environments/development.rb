@@ -2,6 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
 
+  # Cache
   config.cache_classes = true
   config.action_controller.perform_caching = true
   config.cache_storage = :memory_store
