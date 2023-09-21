@@ -15,6 +15,7 @@ RSpec.describe Api::V1::PokemonsController, type: :request do
       let(:cache_key) { "pokemon_#{pokemon_name}" }
       let(:cached_data) do
         {
+          type:'Pokemon',
           abilities: ['lightning-rod', 'static']
         }.as_json
       end
@@ -33,7 +34,8 @@ RSpec.describe Api::V1::PokemonsController, type: :request do
 
     context 'when pokemon name is valid' do
       let(:pokemon) do
-        {
+        { 
+          type: 'Pokemon',
           abilities: ['imposter', 'limber']
         }.as_json
       end
