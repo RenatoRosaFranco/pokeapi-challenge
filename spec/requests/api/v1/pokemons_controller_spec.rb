@@ -8,9 +8,7 @@ RSpec.describe Api::V1::PokemonsController, type: :request do
 
     let(:pokemon_name) { 'ditto' }
 
-    before do
-      get "/api/v1/pokemons/#{pokemon_name}"
-    end
+    before { get "/api/v1/pokemons/#{pokemon_name}" }
 
     context 'when pokemon previously found in the cache' do
       let(:pokemon_name) { 'pikachu' }
@@ -56,7 +54,9 @@ RSpec.describe Api::V1::PokemonsController, type: :request do
 
     context 'when pokemon name is invalid' do
       let(:pokemon_name) { 'radagast' }
-      let(:err_message) { 'Pokemon not found' }
+      let(:err_message) do 
+        I18n.t('api.v1.errors.not_found', name: pokemon_name)
+      end
 
       it 'returns a not found status (404)', :aggregate_failures do
         expect(response).to have_http_status(:not_found)
