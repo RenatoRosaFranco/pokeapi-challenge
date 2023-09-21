@@ -7,12 +7,14 @@ module Http
   class PokemonApiService
     include HTTParty
 
+    attr_reader :api_url
+
     def initialize(api_url = ENV.fetch('API_URL') { 'https://pokeapi.co/api/' })
       @api_url = api_url
     end
 
-    def fetch(api_endpoint)
-      response = self.class.get("#{@api_url}#{api_endpoint}")
+    def fetch(api_endpoint, method = :get, options = {})
+      response = self.class.send(method, "#{api_url}#{api_endpoint}", **options)
       handle_response(response)
     end
 
