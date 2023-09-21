@@ -96,7 +96,7 @@ Abaixo você pode acompanhar uma Screenshot de uma requisição realizada ao end
 ### Charmander
 ![Captura de tela de 2023-09-19 01-38-26](https://github.com/RenatoRosaFranco/pokeapi-challenge/assets/6882872/bee81746-8faa-415d-a181-fdc02a16c123)
 
-### Squitle
+### Squirtle
 ![Captura de tela de 2023-09-19 01-41-34](https://github.com/RenatoRosaFranco/pokeapi-challenge/assets/6882872/0c800e69-7447-4453-96f2-6aade08c81db)
 
 ### Não encontrado (Frodo)
@@ -174,6 +174,11 @@ na pasta raiz do projeto, a mesma onde se encontram os arquivos **Dockerfile** e
 
 <br>
 
+![Captura de tela de 2023-09-21 16-05-17](https://github.com/RenatoRosaFranco/pokeapi-challenge/assets/6882872/b5db9ce9-4702-4d59-83f4-811e174b02f6)
+
+
+<br>
+
 ```
   docker-compose build --no-cache # make the build
   docker-compose up               # Initialize containers
@@ -212,36 +217,48 @@ dados da requisição prévia, já armazenada.
 
 <br>
 
-O tempo de duração do cache pode ser alterado no arquivo **cacheable.rb** o padrão está para uma hora.
-
-```
- CACHE_EXPIRATION_TIME = 1.hour
-```
-
-<br>
-
 Módulo responsavel por implementar o cache na aplicação
 
 <br>
 
 ```
+# frozen_string_literal: true
+
 module Http
-  module Cacheable
-    CACHE_EXPIRATION_TIME = 1.hour
+  module Cache
+    class CacheService
+      attr_reader :logger, :cache
 
-    def generate_cache(suffix, name)
-      "#{suffix}_#{name}"
-    end
+      def initialize(logger, cache)
+        @logger = logger
+        @cache  = cache
+      end
 
-    def read_cache(cache_key)
-      Rails.cache.read(cache_key)
-    end
+      def generate(suffix, name)
+        "#{suffix}_#{name}"
+      end
 
-    def write_cache(cache_key, serialized_object, expiration = CACHE_EXPIRATION_TIME)
-      Rails.cache.write(cache_key, serialized_object, expires_in: expiration)
+      def read(cache_key)
+        logger.level = Logger::INFO
+        logger.write(:info, "Cache key #{cache_key} readed")
+        cache.read(cache_key)
+      rescue StandardError => e
+        logger.level = Logger::ERROR
+        logger.write(:error, "Failed to read cache key #{cache_key}")
+      end
+
+      def write(cache_key, serialized_object, expiration = 1.minute)
+        logger.level = Logger::INFO
+        logger.write(:info, "Cache Key create for #{cache_key}")
+        cache.write(cache_key, serialized_object, expires_in: expiration)
+      rescue StandardError => e
+        logger.level = Logger::ERROR
+        logger.write(:error, "Failed to write cache key #{cache_key}")
+      end
     end
   end
 end
+
 ```
 
 <br>
