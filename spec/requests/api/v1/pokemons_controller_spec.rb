@@ -24,7 +24,7 @@ RSpec.describe Api::V1::PokemonsController, type: :request do
         allow(Rails.cache).to receive(:read).with(cache_key) { cached_data }
       end
 
-      it 'return pokemon from cache', :aggregate_failures do
+      it 'return pokemon from cache', :aggregate_failures do        
         get "/api/v1/pokemons/#{pokemon_name}"
 
         expect(response).to have_http_status(:success)
