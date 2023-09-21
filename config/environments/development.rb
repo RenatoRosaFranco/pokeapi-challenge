@@ -2,10 +2,11 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
 
-  # Cache
+  # Redis Cache
   config.cache_classes = true
   config.action_controller.perform_caching = true
-  config.cache_storage = :memory_store
+  config.cache_store = :redis_store, ENV.fetch('REDIS_URL') { 'redis://localhost:6379/0/cache' }
+  config.active_record.cache_versioning = false
 
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
@@ -24,13 +25,11 @@ Rails.application.configure do
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
-    config.cache_store = :memory_store
     config.public_file_server.headers = {
       "Cache-Control" => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
-
     config.cache_store = :null_store
   end
 

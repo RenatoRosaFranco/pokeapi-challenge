@@ -2,8 +2,14 @@
 
 # Pokemon serializer class
 class PokemonSerializer < ActiveModel::Serializer
+
   # serializer fields names
+  attributes :type
   attributes :abilities
+
+  def type
+    'Pokemon'
+  end
 
   # pokemon abilities names sorted by name
   def abilities

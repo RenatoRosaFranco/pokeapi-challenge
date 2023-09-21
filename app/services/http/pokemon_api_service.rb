@@ -6,24 +6,33 @@ module Http
   # Service to fetch data from PokeApi
   class PokemonApiService
     include HTTParty
-    base_uri ENV.fetch('API_URL') { 'https://pokeapi.co/api/' }
 
-    def initialize(name, page = 1)
-      @name = name
-      @options = { query: { page: page } }
+    attr_reader :api_url
+
+    def initialize(api_url = ENV.fetch('API_URL') { 'https://pokeapi.co/api/' })
+      @api_url = api_url
     end
 
-    def pokemon
-      response = self.class.get("/v2/pokemon/#{@name}", @options)
+    def fetch(api_endpoint, method = :get, options = {})
+      response = self.class.send(method, "#{api_url}#{api_endpoint}", **options)
+      handle_response(response)
+    end
 
+    private
+
+    def handle_response(response)
       case response.code
       when 200
-        JSON.parse(response.body, symbolize_names: true)
-      when 404
+        parse_response(response)
+      when 404 
         raise Http::Exception::NotFound, response
-      else
+      else 
         raise Http::Exception::Error, response
       end
+    end
+
+    def parse_response(response)
+      JSON.parse(response.body, symbolize_names: true)
     end
   end
 end

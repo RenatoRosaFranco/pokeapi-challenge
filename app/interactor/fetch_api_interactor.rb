@@ -4,20 +4,22 @@
 class FetchApiInteractor
   include Interactor
 
-  delegate :data, to: :context
+  delegate :name, to: :context
 
   def call
-    poke_api_client = Http::PokemonApiService.new(data)
-    context.pokemon = poke_api_client.pokemon
-  rescue Http::Exception::NotFound
-    context.fail!(error: t_pokemon, status_code: 404)
-  rescue Http::Exception::Error => e
-    context.fail!(error: e.message, status_code: 500)
+    poke_api_client = Http::PokemonApiService.new
+    context.pokemon = fetch_pokemon(poke_api_client)
   end
 
   private
 
-  def t_pokemon
-    'Pokemon not found'
+  def fetch_pokemon(api_client)
+    api_client.fetch("/v2/pokemon/#{name}")
+  rescue StandardError => exception
+    handle_exception(exception)
+  end
+
+  def handle_exception(exception)
+    Http::Exception::Handler.handle(exception, context)
   end
 end

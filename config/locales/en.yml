@@ -25,9 +25,12 @@
 #
 # en:
 #   "true": "foo"
-#
+# 
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  api:
+    v1:
+      errors:
+        not_found: 'Pokemon not found with name %{name}'

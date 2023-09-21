@@ -4,18 +4,16 @@ module Api
   module V1
     # Pokemons controller class
     class PokemonsController < ApplicationController
-      include Http::Cacheable
-
-      def index
-        cache_key   = generate_cache('pokemon', params[:name])
-        cached_data = read_cache(cache_key)
+      def show
+        cache_key     = @cache_service.generate('pokemon', params[:name])
+        cached_data   = @cache_service.read(cache_key)
 
         if cached_data.nil?
-          result = FetchApiInteractor.call(data: params[:name].downcase)
+          result = FetchApiInteractor.call(name: params[:name].downcase)
 
           if result.success?
             serialized_pokemon = PokemonSerializer.new(result.pokemon).serializable_hash
-            write_cache(cache_key, serialized_pokemon)
+            @cache_service.write(cache_key, serialized_pokemon)
 
             render json: serialized_pokemon, status: :ok
           else

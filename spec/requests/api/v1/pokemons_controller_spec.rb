@@ -8,15 +8,14 @@ RSpec.describe Api::V1::PokemonsController, type: :request do
 
     let(:pokemon_name) { 'ditto' }
 
-    before do
-      get "/api/v1/pokemons/#{pokemon_name}"
-    end
+    before { get "/api/v1/pokemons/#{pokemon_name}" }
 
     context 'when pokemon previously found in the cache' do
       let(:pokemon_name) { 'pikachu' }
       let(:cache_key) { "pokemon_#{pokemon_name}" }
       let(:cached_data) do
         {
+          type:'Pokemon',
           abilities: ['lightning-rod', 'static']
         }.as_json
       end
@@ -25,7 +24,7 @@ RSpec.describe Api::V1::PokemonsController, type: :request do
         allow(Rails.cache).to receive(:read).with(cache_key) { cached_data }
       end
 
-      it 'return pokemon from cache', :aggregate_failures do
+      it 'return pokemon from cache', :aggregate_failures do        
         get "/api/v1/pokemons/#{pokemon_name}"
 
         expect(response).to have_http_status(:success)
@@ -35,7 +34,8 @@ RSpec.describe Api::V1::PokemonsController, type: :request do
 
     context 'when pokemon name is valid' do
       let(:pokemon) do
-        {
+        { 
+          type: 'Pokemon',
           abilities: ['imposter', 'limber']
         }.as_json
       end
@@ -56,7 +56,9 @@ RSpec.describe Api::V1::PokemonsController, type: :request do
 
     context 'when pokemon name is invalid' do
       let(:pokemon_name) { 'radagast' }
-      let(:err_message) { 'Pokemon not found' }
+      let(:err_message) do 
+        I18n.t('api.v1.errors.not_found', name: pokemon_name)
+      end
 
       it 'returns a not found status (404)', :aggregate_failures do
         expect(response).to have_http_status(:not_found)

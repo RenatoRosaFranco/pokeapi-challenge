@@ -16,6 +16,7 @@ gem "puma", "~> 5.0"
 # gem "jbuilder"
 gem 'httparty'
 gem 'active_model_serializers'
+gem 'redis-rails'
 gem 'interactor'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
