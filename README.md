@@ -203,6 +203,11 @@ bundle exec rspec /spec/
 
 <br>
 
+![Captura de tela de 2023-09-22 00-49-36](https://github.com/RenatoRosaFranco/pokeapi-challenge/assets/6882872/18ab7b37-b5f5-4088-bce6-47f30df155e8)
+
+
+<br>
+
 <div align='center'>
   
   # CACHING
