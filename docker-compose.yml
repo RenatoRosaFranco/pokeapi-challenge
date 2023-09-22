@@ -8,7 +8,6 @@ services:
       - .:/app
     depends_on:
       - db
-      - redis
     env_file:
       - .env
     environment:
@@ -18,9 +17,6 @@ services:
     image: keinos/sqlite3:latest
     volumes:
       - db_data:/db
-
-  redis:
-    image: 'redis:latest'
 
 volumes:
   db_data:
