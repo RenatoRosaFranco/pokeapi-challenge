@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Logeable
+  # Custom Reusable logger class
   class Logger
     attr_accessor :logger, :level
 
@@ -13,7 +14,7 @@ module Logeable
     end
 
     def change_log_level(level)
-      @logger.level = @level
+      @logger.level = level
     end
 
     private
@@ -27,7 +28,7 @@ module Logeable
     def log_message(event, message)
       @logger.send(event, message)
     rescue StandardError => e
-      handle_logging_error(e, "Failed to close logger: #{e.message}")
+      handle_logging_error(e, "Failed to log message: #{e.message}")
     end
 
     def close_logger
@@ -37,11 +38,11 @@ module Logeable
     end
 
     def handle_logging_error(error, error_message)
-      set_logger_for(:error)
+      log_for(:error)
       @logger.write(:error, "#{error_message}: #{error.message}")
     end
 
-    def set_logger_for(action)
+    def log_for(action)
       change_log_instance("log/#{action}.log", Logger.const_get(action.upcase))
     end
 
