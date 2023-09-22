@@ -14,7 +14,7 @@ class PokemonSerializer < ActiveModel::Serializer
   def abilities
     object[:abilities]
       .map { |ability| ability[:ability][:name] }
-      .sort
+      .sort_by(&:downcase)
       .presence || []
   end
 end

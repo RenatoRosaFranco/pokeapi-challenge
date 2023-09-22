@@ -82,10 +82,12 @@ GEM
     base64 (0.1.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
+    brakeman (6.0.1)
     builder (3.2.4)
     byebug (11.1.3)
     case_transform (0.2)
       activesupport
+    childprocess (4.1.0)
     code_analyzer (0.5.5)
       sexp_processor
     coderay (1.1.3)
@@ -96,6 +98,7 @@ GEM
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
+    date (3.3.3-java)
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
@@ -117,6 +120,7 @@ GEM
     fasterer (0.10.1)
       colorize (~> 0.7)
       ruby_parser (>= 3.19.1)
+    ffi (1.15.5)
     flay (2.13.1)
       erubi (~> 1.10)
       path_expander (~> 1.0)
@@ -134,12 +138,16 @@ GEM
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
+    iniparse (1.5.0)
     interactor (3.1.2)
     io-console (0.6.0)
+    io-console (0.6.0-java)
     irb (1.8.1)
       rdoc
       reline (>= 0.3.8)
+    jar-dependencies (0.4.1)
     json (2.6.3)
+    json (2.6.3-java)
     jsonapi-renderer (0.2.2)
     kwalify (0.7.2)
     language_server-protocol (3.17.0.3)
@@ -156,8 +164,10 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.4)
     minitest (5.20.0)
     msgpack (1.7.2)
+    msgpack (1.7.2-java)
     multi_xml (0.6.0)
     net-imap (0.3.7)
       date
@@ -169,8 +179,14 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.4-x86_64-linux)
+    nio4r (2.5.9-java)
+    nokogiri (1.15.4)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
+    overcommit (0.60.0)
+      childprocess (>= 0.6.3, < 5)
+      iniparse (~> 1.4)
+      rexml (~> 3.2)
     parallel (1.23.0)
     parser (3.2.2.3)
       ast (~> 2.4.1)
@@ -179,15 +195,24 @@ GEM
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    pry (0.14.2-java)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+      spoon (~> 0.0)
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     psych (5.1.0)
       stringio
+    psych (5.1.0-java)
+      jar-dependencies (>= 0.1.7)
     public_suffix (5.0.3)
-    puma (5.6.7)
+    puma (6.0.2)
+      nio4r (~> 2.0)
+    puma (6.0.2-java)
       nio4r (~> 2.0)
     racc (1.7.1)
+    racc (1.7.1-java)
     rack (2.2.8)
     rack-test (2.1.0)
       rack (>= 1.3)
@@ -277,11 +302,6 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
-    rswag-api (2.10.1)
-      railties (>= 3.1, < 7.1)
-    rswag-ui (2.10.1)
-      actionpack (>= 3.1, < 7.1)
-      railties (>= 3.1, < 7.1)
     rubocop (1.56.3)
       base64 (~> 0.1.1)
       json (~> 2.3)
@@ -296,6 +316,11 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
       parser (>= 3.2.1.0)
+    rubocop-capybara (2.17.0)
+      rubocop (~> 1.41)
+    rubocop-rspec (2.18.1)
+      rubocop (~> 1.33)
+      rubocop-capybara (~> 2.17)
     ruby-progressbar (1.13.0)
     ruby_parser (3.20.3)
       sexp_processor (~> 4.16)
@@ -317,50 +342,67 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    sqlite3 (1.6.6-x86_64-linux)
+    spoon (0.0.6)
+      ffi
+    sqlite3 (1.6.6)
+      mini_portile2 (~> 2.8.0)
     stringio (3.0.8)
     thor (1.2.2)
     thread_safe (0.3.6)
+    thread_safe (0.3.6-java)
     timeout (0.4.0)
     tty-which (0.5.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2023.3)
+      tzinfo (>= 1.0.0)
     unicode-display_width (2.4.2)
+    vcr (6.1.0)
     virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
+    websocket-driver (0.7.6-java)
+      websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.6.11)
 
 PLATFORMS
+  java
+  ruby
+  x64-mingw32
+  x86-mingw32
+  x86-mswin32
   x86_64-linux
 
 DEPENDENCIES
   active_model_serializers
   awesome_print
   bootsnap
+  brakeman
   debug
   dotenv-rails
   factory_bot_rails
   fasterer
+  flog
   httparty
   interactor
+  overcommit
   pry-byebug
-  puma (~> 5.0)
+  puma
   rails (~> 7.0.8)
   rails_best_practices
   redis-rails
   rspec-rails
-  rswag-api
-  rswag-ui
   rubocop
+  rubocop-rspec
   rubycritic
   simplecov
   sqlite3 (~> 1.4)
   tzinfo-data
+  vcr
 
 RUBY VERSION
    ruby 3.2.0p0
