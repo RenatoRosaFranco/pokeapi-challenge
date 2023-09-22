@@ -277,9 +277,9 @@ Para desativar o Cache basta executar o comando novamente e o console irá te re
  bin/rails dev:cache # Development mode is no longer being cached.
 ```
 
+<br>
 
-
-
+![Captura de tela de 2023-09-22 00-41-29](https://github.com/RenatoRosaFranco/pokeapi-challenge/assets/6882872/68f02916-8892-451f-adc1-3945ab5afefb)
 
 
 
