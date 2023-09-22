@@ -26,6 +26,21 @@ end-point que consumirá uma API externa, assim trazendo so os dados interessant
 <br>
 
 <div align='center'>
+
+  # TECNOLOGIAS
+</div>
+
+<br>
+
+<div align='center'>
+
+  <img src="https://github.com/RenatoRosaFranco/pokeapi-challenge/assets/6882872/8afbeb6b-ee1a-44bf-8dd0-324b8c60481b" width="144" height="144" alt="image">
+  <img src="https://github.com/RenatoRosaFranco/pokeapi-challenge/assets/6882872/149cca4c-8dff-46c7-a41b-094699376f46" width="114" height="114" alt="image">
+</div>
+
+<br>
+
+<div align='center'>
   
   # ARQUITETURA
 </div>
