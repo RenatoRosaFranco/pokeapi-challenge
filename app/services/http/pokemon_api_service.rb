@@ -9,7 +9,7 @@ module Http
 
     attr_reader :api_url
 
-    def initialize(api_url = ENV.fetch('API_URL') { 'https://pokeapi.co/api/' })
+    def initialize(api_url = ENV.fetch('API_URL', 'https://pokeapi.co/api/'))
       @api_url = api_url
     end
 
@@ -24,9 +24,9 @@ module Http
       case response.code
       when 200
         parse_response(response)
-      when 404 
+      when 404
         raise Http::Exception::NotFound, response
-      else 
+      else
         raise Http::Exception::Error, response
       end
     end

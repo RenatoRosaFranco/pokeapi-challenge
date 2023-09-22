@@ -2,6 +2,7 @@
 
 module Http
   module Cache
+    # Custom cache service class
     class CacheService
       attr_reader :logger, :cache
 
@@ -20,7 +21,7 @@ module Http
         cache.read(cache_key)
       rescue StandardError => e
         logger.level = Logger::ERROR
-        logger.write(:error, "Failed to read cache key #{cache_key}")
+        logger.write(:error, "Failed to read cache key #{e.message}")
       end
 
       def write(cache_key, serialized_object, expiration = 1.minute)
@@ -29,7 +30,7 @@ module Http
         cache.write(cache_key, serialized_object, expires_in: expiration)
       rescue StandardError => e
         logger.level = Logger::ERROR
-        logger.write(:error, "Failed to write cache key #{cache_key}")
+        logger.write(:error, "Failed to write cache key #{e.message}")
       end
     end
   end
