@@ -20,6 +20,9 @@
 # Ignore coverage files
 /coverage/*
 
+# Idea files
+.idea/*
+
 # Ignore files
 .byebug_history
 
