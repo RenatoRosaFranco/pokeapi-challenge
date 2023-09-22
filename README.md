@@ -115,7 +115,7 @@ Abaixo você pode acompanhar uma Screenshot de uma requisição realizada ao end
 Este projeto foi desenvolvido utilizando a **Versão** 3.0.0 do **Ruby**
 
 ```
-3.0.0
+3.2.0
 ```
 
 <br>
